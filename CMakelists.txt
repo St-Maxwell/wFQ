@@ -1,0 +1,37 @@
+cmake_minimum_required(VERSION 3.14...3.22)
+
+# ---- Project ----
+project(wFQ LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS "-Wall -Wextra")
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2")
+
+# ---- Include guards ----
+if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
+  message(
+    FATAL_ERROR
+      "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there."
+  )
+endif()
+
+include(GNUInstallDirs)
+
+enable_testing()
+
+# ---- Create application executable ----
+add_executable(wFQ
+    src/main.cpp
+)
+
+target_include_directories(
+    wFQ PUBLIC ${PROJECT_SOURCE_DIR}/src
+)
+
+# ---- Add dependencies ----
+find_package(OpenBLAS REQUIRED)
+target_link_libraries(wFQ ${OpenBLAS_LIBRARIES})
+
+find_package(Armadillo REQUIRED)
+target_include_directories(wFQ PUBLIC ${ARMADILLO_INCLUDE_DIRS})
