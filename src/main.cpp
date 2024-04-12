@@ -60,7 +60,7 @@ int main(int argc, char **argv)
     cross_section.open("./" + dirname + "/wFQ_cross_section.out", std::ios::out);
     cross_section << "# scale: " << std::to_string(scale) << std::endl;
     polarizability.open("./" + dirname + "/wFQ_polarizability.out", std::ios::out);
-    cross_section << "# scale: " << std::to_string(scale) << std::endl;
+    polarizability << "# scale: " << std::to_string(scale) << std::endl;
     // charges.open("./" + dirname + "/wFQ_charge_dipole.out", std::ios::out);
 
     wFQ::freq_domain_solver fsolver(coordinate);
